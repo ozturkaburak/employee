@@ -2,10 +2,13 @@ package com.ahmetburak.employee.dto;
 
 import com.ahmetburak.employee.entity.EmploymentDetail;
 import com.ahmetburak.employee.entity.Payroll;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -13,17 +16,20 @@ import java.util.List;
  * Created by ahmetburakozturk on 23.08.2022
  **/
 @Data
-public class EmployeeDTO extends BaseDTO{
+public class EmployeeDTO extends BaseDTO {
 
     private Long id;
 
     @NotNull
-    private String fullname;
+    private String fullName;
 
     @NotNull
     private LocalDate birthdate;
 
-    private List<Payroll> payrolls = new java.util.ArrayList<>();
+//    @JsonManagedReference
+    private List<PayrollDTO> payrolls = new java.util.ArrayList<>();
 
-    private EmploymentDetail employmentDetail;
+    //    @JsonIgnore
+//    @JsonManagedReference
+    private EmploymentDetailDTO employmentDetail;
 }

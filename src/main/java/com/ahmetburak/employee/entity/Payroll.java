@@ -1,10 +1,12 @@
 package com.ahmetburak.employee.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 /**
@@ -14,18 +16,18 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
-public class Payroll extends BaseEntity{
+public class Payroll extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Double salary;
+    @NotNull
+    private LocalDate date;
 
-    private LocalDate paymentDate;
-
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "employee_id")
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee;
 
 }

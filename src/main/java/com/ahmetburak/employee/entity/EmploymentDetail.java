@@ -1,13 +1,13 @@
 package com.ahmetburak.employee.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 /**
@@ -18,12 +18,18 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = true)
-public class EmploymentDetail extends BaseEntity{
+public class EmploymentDetail extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     private LocalDate startDate;
     private LocalDate endDate;
+
+    @JsonBackReference
+    @OneToOne
+    @JoinColumn(name = "user_id",unique = true,nullable = false)
+    private Employee employee;
 }

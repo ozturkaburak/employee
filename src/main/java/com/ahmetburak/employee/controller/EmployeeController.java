@@ -7,6 +7,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by ahmetburakozturk on 23.08.2022
@@ -20,7 +21,7 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @PostMapping
-    public EmployeeDTO save(@Valid @RequestBody EmployeeDTO employeeDTO) {
+    public EmployeeDTO save(@RequestBody EmployeeDTO employeeDTO) {
         return employeeService.saveOrUpdate(employeeDTO);
     }
 
@@ -37,5 +38,10 @@ public class EmployeeController {
     @DeleteMapping("{userId}")
     public void deleteById(@PathVariable Long userId) {
         employeeService.deleteById(userId);
+    }
+
+    @GetMapping
+    public List<Object[]> statistics(){
+        return employeeService.findAllByEmploymentDetail_StartDateAfterAndPayrolls();
     }
 }

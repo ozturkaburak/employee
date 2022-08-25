@@ -8,6 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -35,5 +39,11 @@ public class EmployeeService {
     public EmployeeDTO findById(Long userId) {
         Optional<Employee> byId = employeeRepository.findById(userId);
         return byId.map(employeeMapper::toDTO).orElse(null);
+    }
+
+    public List<Object[]> findAllByEmploymentDetail_StartDateAfterAndPayrolls(){
+        LocalDate of = LocalDate.of(2022, 8, 31);
+        System.err.println(of);
+        return employeeRepository.findAllByEmploymentDetail_StartDateAfterAndPayrolls(of,7900D);
     }
 }

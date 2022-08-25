@@ -1,16 +1,15 @@
 package com.ahmetburak.employee.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by ahmetburakozturk on 23.08.2022
@@ -26,16 +25,16 @@ public class Employee extends BaseEntity {
     private Long id;
 
     @NotNull
-    private String fullname;
+    private String fullName;
 
     @NotNull
     private LocalDate birthdate;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "employee")
     private List<Payroll> payrolls = new java.util.ArrayList<>();
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn
+    @JsonIgnore
+    @OneToOne(mappedBy = "employee")
     private EmploymentDetail employmentDetail;
 }
