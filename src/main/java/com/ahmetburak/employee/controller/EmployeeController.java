@@ -4,9 +4,11 @@ import com.ahmetburak.employee.dto.EmployeeDTO;
 import com.ahmetburak.employee.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -40,8 +42,9 @@ public class EmployeeController {
         employeeService.deleteById(userId);
     }
 
-    @GetMapping
-    public List<Object[]> statistics(){
-        return employeeService.findAllByEmploymentDetail_StartDateAfterAndPayrolls();
+    @GetMapping("ses")
+    public List<Object[]> findAllByEmploymentDetailsByStartDateAndSalary(@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate, @RequestParam("lowerSalaryLimit") Double lowerSalaryLimit) {
+        return employeeService.findAllByEmploymentDetailsByStartDateAndSalary(startDate, lowerSalaryLimit);
     }
+
 }

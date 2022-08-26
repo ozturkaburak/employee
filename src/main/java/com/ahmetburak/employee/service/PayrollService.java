@@ -1,5 +1,6 @@
 package com.ahmetburak.employee.service;
 
+import com.ahmetburak.employee.dto.EmployeeDTO;
 import com.ahmetburak.employee.dto.PayrollDTO;
 import com.ahmetburak.employee.entity.Payroll;
 import com.ahmetburak.employee.mapper.PayrollMapper;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -22,7 +24,11 @@ public class PayrollService {
     private final PayrollMapper payrollMapper;
     private final PayrollRepository payrollRepository;
 
+    private final EmployeeService employeeService;
+
     public PayrollDTO saveOrUpdate(PayrollDTO payrollDTO) {
+        EmployeeDTO byId = employeeService.findById(Objects.requireNonNull(payrollDTO.getEmployee().getId()));
+        payrollDTO.setEmployee(byId);
         Payroll savedPayroll = payrollMapper.toEntity(payrollDTO);
         savedPayroll = payrollRepository.save(savedPayroll);
         return payrollMapper.toDTO(savedPayroll);

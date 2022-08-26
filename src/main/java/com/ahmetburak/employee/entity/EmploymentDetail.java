@@ -1,14 +1,11 @@
 package com.ahmetburak.employee.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Created by ahmetburakozturk on 23.08.2022
@@ -17,7 +14,10 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class EmploymentDetail extends BaseEntity {
 
     @Id
@@ -27,9 +27,18 @@ public class EmploymentDetail extends BaseEntity {
     @NotNull
     private LocalDate startDate;
     private LocalDate endDate;
+    private LocalDateTime processTime;
 
-    @JsonBackReference
     @OneToOne
-    @JoinColumn(name = "user_id",unique = true,nullable = false)
+    @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee;
+
+    @OneToOne
+    @JoinColumn(name = "department_id", nullable = false)
+    private Department department;
+
+    @OneToOne
+    @JoinColumn(name = "office_id", nullable = false)
+    private Office office;
+
 }
