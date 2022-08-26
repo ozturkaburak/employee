@@ -14,7 +14,7 @@ import java.time.Month;
 @Repository
 public interface EmployeeOfTheMonthRepository extends JpaRepository<EmployeeOfTheMonth, Long> {
 
-    @Query("select eom from EmployeeOfTheMonth eom where eom.month=:currentMonth")
+    @Query("select eom from EmployeeOfTheMonth eom where eom.selectedMonth=:currentMonth")
     EmployeeOfTheMonthProjection findEmployeeOfTheMonth(Month currentMonth);
 
 }

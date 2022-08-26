@@ -42,8 +42,8 @@ public class EmployeeOfTheMonthService {
             LocalDateTime now = LocalDateTime.now();
             EmployeeOfTheMonth employeeOfTheMonth = new EmployeeOfTheMonth();
             employeeOfTheMonth.setEmployee(entityById);
-            employeeOfTheMonth.setTime(now);
-            employeeOfTheMonth.setMonth(now.getMonth());
+            employeeOfTheMonth.setSelectionTime(now);
+            employeeOfTheMonth.setSelectedMonth(now.getMonth());
 
             employeeOfTheMonthRepository.save(employeeOfTheMonth);
         }

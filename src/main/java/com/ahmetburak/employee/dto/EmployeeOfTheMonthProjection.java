@@ -9,9 +9,9 @@ import java.time.Month;
  * Created by ahmetburakozturk on 25.08.2022
  **/
 public interface EmployeeOfTheMonthProjection {
-    LocalDateTime getTime();
+    LocalDateTime getSelectedMonth();
 
-    Month getMonth();
+    Month getSelectedTime();
 
     Employee getEmployee();
 }

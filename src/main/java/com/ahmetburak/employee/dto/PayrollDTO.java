@@ -13,15 +13,14 @@ import java.time.LocalDate;
 @Data
 @Builder
 @AllArgsConstructor
-public class PayrollDTO extends BaseDTO{
+public class PayrollDTO extends BaseDTO {
 
     private Long id;
 
     private Double salary;
     @NotNull
-    private LocalDate date;
+    private LocalDate paymentDate;
 
-//    @JsonBackReference
     @NotNull
     private EmployeeDTO employee;
 }

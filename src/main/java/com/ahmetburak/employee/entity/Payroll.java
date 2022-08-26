@@ -22,7 +22,7 @@ public class Payroll extends BaseEntity {
 
     private Double salary;
     @NotNull
-    private LocalDate date;
+    private LocalDate paymentDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", nullable = false)

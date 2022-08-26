@@ -23,7 +23,7 @@ public class EmployeeOfTheMonth extends BaseEntity {
     private Employee employee;
 
     @Enumerated(EnumType.STRING)
-    private Month month;
-    private LocalDateTime time;
+    private Month selectedMonth;
+    private LocalDateTime selectionTime;
 
 }
